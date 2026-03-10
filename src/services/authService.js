@@ -3,14 +3,14 @@ import jwt from "jsonwebtoken"
 import fs from "fs/promises"
 
 const SECRET = "segredo"
-const USERS_FILE = "./src/data/users.json"
+const USERS_FILE = "./src/data/user.json"
 
 async function getUsers() {
     const data = await fs.readFile(USERS_FILE, "utf-8")
     return JSON.parse(data)
 }
 
-async function register(users) {
+async function saveAuth(users) {
     await fs.writeFile(USERS_FILE, JSON.stringify(users, null, 2))
 }
 
@@ -33,7 +33,7 @@ export const register = async ({ email, password }) => {
 
     users.push(newUser)
 
-    await register(users)
+    await saveAuth(users)
 
     return { email }
 }

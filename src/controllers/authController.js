@@ -1,19 +1,39 @@
 import * as authService from "../services/authService.js"
 
-import { Resend } from 'resend';
+import { Resend } from "resend"
 
-const resend = new Resend('');
+const resend = process.env.RESEND_API_KEY
+    ? new Resend(process.env.RESEND_API_KEY)
+    : null
+
+const sendRegisterEmail = async (email) => {
+    if (!resend) {
+        return
+    }
+
+    try {
+        const { error } = await resend.emails.send({
+            from: "noreply@email.redactopro.com",
+            to: email,
+            subject: "Sua conta foi criada",
+            html: "<p>Parabéns! Sua conta foi criada com sucesso.</p>"
+        })
+
+        if (error) {
+            console.error("Falha ao enviar e-mail de cadastro:", error.message)
+        }
+    } catch (error) {
+        console.error("Erro ao chamar o serviço de e-mail:", error.message)
+    }
+}
 
 const register = async (req, res) => {
     try {
         const user = await authService.register(req.body)
-        await resend.emails.send({
-            from: 'onboarding@resend.dev',
-            to: 'antonioandre1008@gmail.com',
-            subject: 'Hello World',
-            html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
-        });
-        res.json(user)
+
+        await sendRegisterEmail(req.body.email)
+
+        res.status(201).json(user)
     } catch (error) {
         res.status(400).json({ error: error.message })
     }

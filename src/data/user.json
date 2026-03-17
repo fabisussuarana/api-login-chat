@@ -1,18 +1,1 @@
-[
-  {
-    "email": "teste@email.com",
-    "password": "$2b$10$FrXjeUg2B/dMkuY5L9e/3OiGLTGee4BvCxsK2aNG5VWCYQSZ8El9K"
-  },
-  {
-    "email": "oioi@email.com",
-    "password": "$2b$10$7Gka/CYxwKFaIHVqupjCq.kEcPgWtXFv8w/999.jo1dJ4UoGYMi82"
-  },
-  {
-    "email": "oi@email.com",
-    "password": "$2b$10$D7m/PsNq5DP.EvxHzOkmwOEDB95ckZm07GF6xLA2O213sEAH4cghG"
-  },
-  {
-    "email": "oooi@email.com",
-    "password": "$2b$10$//thAZR8hn9LkA.J9hBNH.fesyRTSuXsYokisxpzbhVZrCImFWN.W"
-  }
-]
+[]

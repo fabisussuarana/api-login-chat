@@ -1,0 +1,9 @@
+{
+  "watch": [
+    "index.js",
+    "src"
+  ],
+  "ignore": [
+    "src/data/*.json"
+  ]
+}

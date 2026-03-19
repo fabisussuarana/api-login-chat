@@ -12,16 +12,17 @@ const sendRegisterEmail = async (email) => {
     }
 
     try {
-        const { error } = await resend.emails.send({
-            from: "noreply@email.redactopro.com",
-            to: email,
-            subject: "Sua conta foi criada",
-            html: "<p>Parabéns! Sua conta foi criada com sucesso.</p>"
-        })
-
-        if (error) {
-            console.error("Falha ao enviar e-mail de cadastro:", error.message)
-        }
+        setTimeout(async () => {
+            const { error } = await resend.emails.send({
+                from: "noreply@email.redactopro.com",
+                to: email,
+                subject: "Sua conta foi criada",
+                html: "<p>Parabéns! Sua conta foi criada com sucesso.</p>"
+            })
+            if (error) {
+                console.error("Falha ao enviar e-mail de cadastro:", error.message)
+            }
+        }, 30_000);
     } catch (error) {
         console.error("Erro ao chamar o serviço de e-mail:", error.message)
     }

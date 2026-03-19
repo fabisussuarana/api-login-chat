@@ -2,7 +2,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import fs from "fs/promises"
 
-const SECRET = "segredo"
+const SECRET = process.env.JWT_SECRET || "segredo"
 const USERS_FILE = "./src/data/user.json"
 
 async function getUsers() {
@@ -59,6 +59,10 @@ export const login = async ({ email, password }) => {
     })
 
     return token
+}
+
+export const verifyToken = (token) => {
+    return jwt.verify(token, SECRET)
 }
 
 export const logout = async () => {
